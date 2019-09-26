@@ -14,7 +14,7 @@
         <TextBlock x:Name="HXandYresult" HorizontalAlignment="Left" Margin="20,185,0,0" TextWrapping="Wrap" Text="H(X, Y) = " VerticalAlignment="Top"/>
         <TextBlock x:Name="HXprovYresult" HorizontalAlignment="Left" Margin="20,205,0,0" TextWrapping="Wrap" Text="H(X/Y) = " VerticalAlignment="Top"/>
         <TextBlock x:Name="HYprovXresult" HorizontalAlignment="Left" Margin="20,227,0,0" TextWrapping="Wrap" Text="H(Y/X) = " VerticalAlignment="Top"/>
-        <RadioButton x:Name="_XandY" Content="P(X, Y)" HorizontalAlignment="Left" Margin="100,104,0,0" VerticalAlignment="Top" AutomationProperties.Name="XandY" Checked="_XandYRadioButton_Checked"/>
+        <RadioButton x:Name="_XandY" Content="P(X, Y)" HorizontalAlignment="Left" Margin="100,104,0,0" VerticalAlignment="Top" AutomationProperties.Name="XandY" Checked="_XandYRadioButton_Checked" IsChecked="True"/>
         <RadioButton x:Name="_YprovX" Content="P(Y/X)" HorizontalAlignment="Left" Margin="100,124,0,0" VerticalAlignment="Top" Checked="_YprovXRadioButton_Checked" AutomationProperties.Name="YprovidingX"/>
         <TextBox x:Name="sizeY" HorizontalAlignment="Left" Height="24" Margin="129,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="24" TextChanged="TextBox_TextChanged" AutomationProperties.Name="sizeY" Text="3" TextAlignment="Center"/>
         <Button x:Name="calculate" Content="Calculate" HorizontalAlignment="Left" Margin="20,106,0,0" VerticalAlignment="Top" Width="75" Click="calculateButton_Click" AutomationProperties.Name="calculate" Height="25"/>
