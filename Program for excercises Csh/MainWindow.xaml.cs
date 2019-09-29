@@ -23,8 +23,8 @@ namespace Program_for_excercises_Csh
         TextBox[,] elements;
         double[] PXi;
         double[] PYk;
-        double[,] PYkProvPXi;
-        double[,] PXiProvPYi;
+        double PYprovPX;
+        double PXprovPY;
         int x, y;
 
         const string HXstring = "H(X) = ";
@@ -88,8 +88,8 @@ namespace Program_for_excercises_Csh
             HXresult.Text = HXstring + CalculateHX();
             HYresult.Text = HYstring + CalculateHY();
             HXandYresult.Text = HXandYstring + CalculateHXandY();
-            PXiProvPYi = CalculatePXiProvPYi();
-            PYkProvPXi = CalculatePYkProvPXi();
+            //PXprovPY = CalculatePXprovPY();
+            //PYprovPX = CalculatePYprovPX();
             HYprovXresult.Text = HYprovidingXstring + CalculateHYprovHX();
         }
 
@@ -168,45 +168,33 @@ namespace Program_for_excercises_Csh
             return HXandY;
         }
 
-        double[,] CalculatePYkProvPXi()
-        {
-            double[,] PYkProvPXi = new double[y, x];
-            for (int j = 0; j < x; j++) 
-            {
-                for (int i = 0; i < y; i++) 
-                {
-                    PYkProvPXi[i, j] = Convert.ToDouble(elements[i, j].Text) / PXi[j];
-                }
-            }
-            return PYkProvPXi;
-        }
-
-        double[,] CalculatePXiProvPYi()
-        {
-            double[,] PXiProvPYi = new double[y, x];
-            for (int i = 0; i < y; i++)
-            {
-                for (int j = 0; j < y; j++)
-                {
-                    PXiProvPYi[i, j] = Convert.ToDouble(elements[i, j].Text) / PYk[i];
-                }
-            }
-            return PXiProvPYi;
-        }
-
         double CalculateHYprovHX()
         {
-            double HYprovHX = 0;
-            double[,] elems = new double[y, x];
-            for (int j = 0; j < y; j++)
-            {
-                for (int i = 0; i < x; i++)
+            double HXprovHX = 0;
+            double[,] elems = new double[y, x],
+                YXtemp = new double[y, x];
+            for (int j = 0; j < x; j++)
+                for (int i = 0; i < y; i++)
                 {
                     elems[i, j] = Convert.ToDouble(elements[i, j].Text);
-                    HYprovHX -= elems[i, j] * Math.Log(PYkProvPXi[i, j], 2);
+                    YXtemp[i, j] = elems[i, j] / PXi[j];
+                    HXprovHX -= elems[i, j] * Math.Log(YXtemp[i, j], 2);
                 }
-            }
-            return HYprovHX;
+            Console.WriteLine(YXtemp[0, 0]);
+            return HXprovHX;
+        }
+
+        double CalculateHXprovHY()
+        {
+            //double[,] PXiProvPYi = new double[y, x];
+            //for (int i = 0; i < y; i++)
+            //{
+            //    for (int j = 0; j < y; j++)
+            //    {
+            //        PXiProvPYi[i, j] = Convert.ToDouble(elements[i, j].Text) / PYk[i];
+            //    }
+            //}
+            return 0;
         }
     }
 }
