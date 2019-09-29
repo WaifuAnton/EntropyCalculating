@@ -90,7 +90,7 @@ namespace Program_for_excercises_Csh
             HXandYresult.Text = HXandYstring + CalculateHXandY();
             PXiProvPYi = CalculatePXiProvPYi();
             PYkProvPXi = CalculatePYkProvPXi();
-            HYprovXresult.Text = HYprovidingXstring + ;
+            HYprovXresult.Text = HYprovidingXstring + CalculateHYprovHX();
         }
 
         double[] CalculatePXi()
@@ -160,13 +160,11 @@ namespace Program_for_excercises_Csh
             double HXandY = 0;
             double[,] elems = new double[y, x];
             for (int j = 0; j < x; j++)
-            {
                 for (int i = 0; i < y; i++)
                 {
                     elems[i, j] = Convert.ToDouble(elements[i, j].Text);
                     HXandY -= elems[i, j] * Math.Log(elems[i, j], 2);
                 }
-            }
             return HXandY;
         }
 
@@ -200,9 +198,9 @@ namespace Program_for_excercises_Csh
         {
             double HYprovHX = 0;
             double[,] elems = new double[y, x];
-            for (int j = 0; j < x; j++)
+            for (int j = 0; j < y; j++)
             {
-                for (int i = 0; i < y; i++)
+                for (int i = 0; i < x; i++)
                 {
                     elems[i, j] = Convert.ToDouble(elements[i, j].Text);
                     HYprovHX -= elems[i, j] * Math.Log(PYkProvPXi[i, j], 2);
