@@ -170,7 +170,7 @@ namespace Program_for_excercises_Csh
 
         double CalculateHYprovHX()
         {
-            double HXprovHX = 0;
+            double HYprovHX = 0;
             double[,] elems = new double[y, x],
                 YXtemp = new double[y, x];
             for (int j = 0; j < x; j++)
@@ -178,10 +178,10 @@ namespace Program_for_excercises_Csh
                 {
                     elems[i, j] = Convert.ToDouble(elements[i, j].Text);
                     YXtemp[i, j] = elems[i, j] / PXi[j];
-                    HXprovHX -= elems[i, j] * Math.Log(YXtemp[i, j], 2);
+                    HYprovHX -= elems[i, j] * Math.Log(YXtemp[i, j], 2);
                 }
             Console.WriteLine(YXtemp[0, 0]);
-            return HXprovHX;
+            return HYprovHX;
         }
 
         double CalculateHXprovHY()
