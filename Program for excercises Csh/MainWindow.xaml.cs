@@ -30,7 +30,7 @@ namespace Program_for_excercises_Csh
         const string HXstring = "H(X) = ";
         const string HYstring = "H(Y) = ";
         const string HXandYstring = "H(X, Y) = ";
-        const string HXprovidingY = "H(X/Y) = ";
+        const string HXprovidingYstring = "H(X/Y) = ";
         const string HYprovidingXstring = "H(Y/X) = ";
 
         public MainWindow()
@@ -88,9 +88,8 @@ namespace Program_for_excercises_Csh
             HXresult.Text = HXstring + CalculateHX();
             HYresult.Text = HYstring + CalculateHY();
             HXandYresult.Text = HXandYstring + CalculateHXandY();
-            //PXprovPY = CalculatePXprovPY();
-            //PYprovPX = CalculatePYprovPX();
             HYprovXresult.Text = HYprovidingXstring + CalculateHYprovHX();
+            HXprovYresult.Text = HXprovidingYstring + CalculateHXprovHY();
         }
 
         double[] CalculatePXi()
@@ -180,21 +179,22 @@ namespace Program_for_excercises_Csh
                     YXtemp[i, j] = elems[i, j] / PXi[j];
                     HYprovHX -= elems[i, j] * Math.Log(YXtemp[i, j], 2);
                 }
-            Console.WriteLine(YXtemp[0, 0]);
             return HYprovHX;
         }
 
         double CalculateHXprovHY()
         {
-            //double[,] PXiProvPYi = new double[y, x];
-            //for (int i = 0; i < y; i++)
-            //{
-            //    for (int j = 0; j < y; j++)
-            //    {
-            //        PXiProvPYi[i, j] = Convert.ToDouble(elements[i, j].Text) / PYk[i];
-            //    }
-            //}
-            return 0;
+            double PXprovPY = 0;
+            double[,] elems = new double[y, x],
+                XYtemp = new double[y, x];
+            for (int j = 0; j < x; j++)
+                for (int i = 0; i < y; i++)
+                {
+                    elems[i, j] = Convert.ToDouble(elements[i, j].Text);
+                    XYtemp[i, j] = elems[i, j] / PYk[i];
+                    PXprovPY -= elems[i, j] * Math.Log(XYtemp[i, j], 2);
+                }
+            return PXprovPY;
         }
     }
 }
