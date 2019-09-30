@@ -45,40 +45,17 @@ namespace Program_for_excercises_Csh
 
         private void Grid1_Loaded(object sender, RoutedEventArgs e)
         {
-            CreateMatrix();
-        }
-
-        private void CreateMatrix()
-        {
-            if (elements != null)
-                for (int i = 0; i < y; i++)
-                    for (int j = 0; j < x; j++)
-                        grid1.Children.Remove(elements[i, j]);
-            x = Convert.ToInt32(sizeX.Text);
-            y = Convert.ToInt32(sizeY.Text);
-            double left = -100, top = -350;
-            elements = new TextBox[y, x];
-            for (int i = 0; i < y; i++)
-            {
-                for (int j = 0; j < x; j++)
-                {
-                    TextBox element = new TextBox();
-                    element.Width = 48;
-                    element.Height = 24;
-                    element.Margin = new Thickness(left, top, 0, 0);
-                    element.Foreground = new SolidColorBrush(Colors.Black);
-                    left += 120;
-                    elements[i, j] = element;
-                    grid1.Children.Add(elements[i, j]);
-                }
-                top += 70;
-                left = -100;
-            }        
-        }
+            CreateMatrix(3, 3);
+        }     
 
         private void createButton_Click(object sender, RoutedEventArgs e)
         {
-            CreateMatrix();
+            int width = Convert.ToInt32(sizeX.Text),
+                height = Convert.ToInt32(sizeY.Text);
+            if ((bool)_XandY.IsChecked)
+                CreateMatrix(height, width);
+            else if ((bool)_X.IsChecked)
+                CreateMatrix(1, width);
         }
 
         private void calculateButton_Click(object sender, RoutedEventArgs e)
@@ -94,7 +71,7 @@ namespace Program_for_excercises_Csh
 
         double[] CalculatePXi()
         {
-            if ((bool)_XandY.IsChecked)
+            if (!(bool)_YprovX.IsChecked)
             {
                 double[] PXi = new double[x];
                 double sum = 0;
@@ -182,6 +159,11 @@ namespace Program_for_excercises_Csh
             return HYprovHX;
         }
 
+        private void _X_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         double CalculateHXprovHY()
         {
             double PXprovPY = 0;
@@ -195,6 +177,36 @@ namespace Program_for_excercises_Csh
                     PXprovPY -= elems[i, j] * Math.Log(XYtemp[i, j], 2);
                 }
             return PXprovPY;
+        }
+
+        private void CreateMatrix(int height, int width)
+        {
+            if (elements != null)
+                for (int i = 0; i < y; i++)
+                    for (int j = 0; j < x; j++)
+                        grid1.Children.Remove(elements[i, j]);
+            x = width;
+            y = height;
+            sizeX.Text = Convert.ToString(width);
+            sizeY.Text = Convert.ToString(height);
+            int left = -100, top = -350;
+            elements = new TextBox[y, x];
+            for (int i = 0; i < y; i++)
+            {
+                for (int j = 0; j < x; j++)
+                {
+                    TextBox element = new TextBox();
+                    element.Width = 48;
+                    element.Height = 24;
+                    element.Margin = new Thickness(left, top, 0, 0);
+                    element.Foreground = new SolidColorBrush(Colors.Black);
+                    left += 120;
+                    elements[i, j] = element;
+                    grid1.Children.Add(elements[i, j]);
+                }
+                top += 70;
+                left = -100;
+            }
         }
     }
 }
