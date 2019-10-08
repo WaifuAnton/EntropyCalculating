@@ -21,10 +21,9 @@ namespace Program_for_excercises_Csh
     public partial class MainWindow : Window
     {
         TextBox[,] elements;
-        double[] PXi;
-        double[] PYk;
-        double PYprovPX;
-        double PXprovPY;
+        double[] PXi, PYk;
+        double PYprovPX, PXprovPY;
+        double Rx, Ry;
         int x, y;
 
         const string HXstring = "H(X) = ";
@@ -32,6 +31,8 @@ namespace Program_for_excercises_Csh
         const string HXandYstring = "H(X, Y) = ";
         const string HXprovidingYstring = "H(X/Y) = ";
         const string HYprovidingXstring = "H(Y/X) = ";
+        const string RXstring = "Rx = ";
+        const string RYstring = "Ry = ";
 
         public MainWindow()
         {
@@ -67,6 +68,10 @@ namespace Program_for_excercises_Csh
             HXandYresult.Text = HXandYstring + CalculateHXandY();
             HYprovXresult.Text = HYprovidingXstring + CalculateHYprovHX();
             HXprovYresult.Text = HXprovidingYstring + CalculateHXprovHY();
+            Rx = 1 - CalculateHX() / Math.Log(Convert.ToDouble(sizeX.Text), 2);
+            RX.Text = RXstring + Rx;
+            Ry = 1 - CalculateHY() / Math.Log(Convert.ToDouble(sizeY.Text), 2);
+            RY.Text = RYstring + Ry;
         }
 
         double[] CalculatePXi()

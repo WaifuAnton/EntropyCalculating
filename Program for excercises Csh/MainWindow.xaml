@@ -19,5 +19,7 @@
         <TextBox x:Name="sizeY" HorizontalAlignment="Left" Height="24" Margin="129,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="24" TextChanged="TextBox_TextChanged" AutomationProperties.Name="sizeY" Text="3" TextAlignment="Center"/>
         <Button x:Name="calculate" Content="Calculate" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top" Width="75" Click="calculateButton_Click" AutomationProperties.Name="calculate" Height="25"/>
         <RadioButton x:Name="_X" Content="P(X)" HorizontalAlignment="Left" Margin="100,86,0,0" VerticalAlignment="Top" AutomationProperties.Name="_X" Checked="_X_Checked"/>
+        <TextBlock x:Name="RX" HorizontalAlignment="Left" Margin="20,211,0,0" TextWrapping="Wrap" Text="Rx = " VerticalAlignment="Top"/>
+        <TextBlock x:Name="RY" HorizontalAlignment="Left" Margin="19,232,0,0" TextWrapping="Wrap" Text="Ry = " VerticalAlignment="Top"/>
     </Grid>
 </Window>
