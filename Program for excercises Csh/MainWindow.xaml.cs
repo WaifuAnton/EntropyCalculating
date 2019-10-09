@@ -57,6 +57,10 @@ namespace Program_for_excercises_Csh
                 CreateMatrix(height, width);
             else if ((bool)_X.IsChecked)
                 CreateMatrix(1, width);
+            else if ((bool)_YprovX_x.IsChecked)
+            {
+
+            }
         }
 
         private void calculateButton_Click(object sender, RoutedEventArgs e)
@@ -76,7 +80,7 @@ namespace Program_for_excercises_Csh
 
         double[] CalculatePXi()
         {
-            if (!(bool)_YprovX.IsChecked)
+            if (!(bool)_YprovX_x.IsChecked)
             {
                 double[] PXi = new double[x];
                 double sum = 0;
@@ -89,7 +93,7 @@ namespace Program_for_excercises_Csh
                 }
                 return PXi;
             }
-            else if((bool)_YprovX.IsChecked)
+            else if((bool)_YprovX_x.IsChecked)
             {
                 return null;
             }
@@ -147,6 +151,11 @@ namespace Program_for_excercises_Csh
                     HXandY -= elems[i, j] * Math.Log(elems[i, j], 2);
                 }
             return HXandY;
+        }
+
+        private void _YprovX_xRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
 
         double CalculateHYprovHX()
