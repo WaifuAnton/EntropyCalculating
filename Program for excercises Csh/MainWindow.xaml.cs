@@ -73,7 +73,7 @@ namespace Program_for_excercises_Csh
                     top += 70;
                 }
             }
-            else if ((bool)_YprovX_y.IsChecked)
+            else if ((bool)_XprovY_y.IsChecked)
             {
                 CreateMatrix(height, width);
                 PY = new TextBox[height];
@@ -144,7 +144,7 @@ namespace Program_for_excercises_Csh
                 }
                 return PYk;
             }
-            else if ((bool)_YprovX_y.IsChecked) 
+            else if ((bool)_XprovY_y.IsChecked) 
             {
                 for (int i = 0; i < PYk.Length; i++)
                     PYk[i] = Convert.ToDouble(PX[i].Text);
@@ -167,6 +167,24 @@ namespace Program_for_excercises_Csh
             for (int k = 0; k < PYk.Length; k++)
                 HY -= PYk[k] * Math.Log(PYk[k], 2);
             return HY;
+        }
+
+        double[,] CalculatePXAndY()
+        {
+            double[,] matrix = new double[y, x];
+            if ((bool)_XandY.IsChecked || (bool)_X.IsChecked)
+                for (int i = 0; i < y; i++)
+                    for (int j = 0; j < x; j++)
+                        matrix[i, j] = Convert.ToDouble(elements[i, j].Text);
+            else if ((bool)_YprovX_x.IsChecked)
+                for (int j = 0; j < x; j++)
+                    for (int i = 0; i < y; i++)
+                        matrix[i, j] = PXi[j] * Convert.ToDouble(elements[i, j].Text);
+            else if ((bool)_XprovY_y.IsChecked)
+                for (int i = 0; i < y; i++)
+                    for (int j = 0; j < x; j++)
+                        matrix[i, j] = PYk[j] * Convert.ToDouble(elements[i, j].Text);
+            return matrix;
         }
 
         private void _YprovXRadioButton_Checked(object sender, RoutedEventArgs e)
