@@ -108,7 +108,8 @@ namespace Program_for_excercises_Csh
         double[] CalculatePXi()
         {
             double[] PXi = new double[x];
-            if ((bool)_XandY.IsChecked || (bool)_X.IsChecked)
+            //double[,]
+            if (!(bool)_YprovX_x.IsChecked)
             {
                 double sum = 0;
                 for (int j = 0, t = 0; j < x; j++, t++)
@@ -132,25 +133,24 @@ namespace Program_for_excercises_Csh
         double[] CalculatePYk()
         {
             double[] PYk = new double[y];
-            if ((bool)_XandY.IsChecked)
+            double[,] elems = CalculatePXAndY();
+            if (!(bool)_XprovY_y.IsChecked)
             {
                 double sum = 0;
                 for (int i = 0, t = 0; i < y; i++, t++)
                 {
                     for (int j = 0; j < x; j++)
-                        sum += Convert.ToDouble(elements[i, j].Text);
+                        sum += Convert.ToDouble(elems[i, j]);
                     PYk[t] = sum;
                     sum = 0;
                 }
-                return PYk;
             }
-            else if ((bool)_XprovY_y.IsChecked) 
+            else
             {
                 for (int i = 0; i < PYk.Length; i++)
                     PYk[i] = Convert.ToDouble(PX[i].Text);
-                return PYk;
             }
-            return null;
+            return PYk;
         }
 
         double CalculateHX()
@@ -200,13 +200,10 @@ namespace Program_for_excercises_Csh
         double CalculateHXandY()
         {
             double HXandY = 0;
-            double[,] elems = new double[y, x];
+            double[,] elems = CalculatePXAndY();
             for (int j = 0; j < x; j++)
                 for (int i = 0; i < y; i++)
-                {
-                    elems[i, j] = Convert.ToDouble(elements[i, j].Text);
                     HXandY -= elems[i, j] * Math.Log(elems[i, j], 2);
-                }
             return HXandY;
         }
 
@@ -223,12 +220,11 @@ namespace Program_for_excercises_Csh
         double CalculateHYprovHX()
         {
             double HYprovHX = 0;
-            double[,] elems = new double[y, x],
+            double[,] elems = CalculatePXAndY(),
                 YXtemp = new double[y, x];
             for (int j = 0; j < x; j++)
                 for (int i = 0; i < y; i++)
                 {
-                    elems[i, j] = Convert.ToDouble(elements[i, j].Text);
                     YXtemp[i, j] = elems[i, j] / PXi[j];
                     HYprovHX -= elems[i, j] * Math.Log(YXtemp[i, j], 2);
                 }
@@ -243,12 +239,11 @@ namespace Program_for_excercises_Csh
         double CalculateHXprovHY()
         {
             double PXprovPY = 0;
-            double[,] elems = new double[y, x],
+            double[,] elems = CalculatePXAndY(),
                 XYtemp = new double[y, x];
             for (int j = 0; j < x; j++)
                 for (int i = 0; i < y; i++)
                 {
-                    elems[i, j] = Convert.ToDouble(elements[i, j].Text);
                     XYtemp[i, j] = elems[i, j] / PYk[i];
                     PXprovPY -= elems[i, j] * Math.Log(XYtemp[i, j], 2);
                 }
