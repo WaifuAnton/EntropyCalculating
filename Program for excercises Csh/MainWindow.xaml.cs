@@ -23,7 +23,6 @@ namespace Program_for_excercises_Csh
         TextBox[,] elements;
         TextBox[] PX, PY;
         double[] PXi, PYk;
-        double PYprovPX, PXprovPY;
         double Rx, Ry;
         int x, y;
 
@@ -107,40 +106,38 @@ namespace Program_for_excercises_Csh
 
         double[] CalculatePXi()
         {
-            double[] PXi = new double[x];
-            //double[,]
+            double[] PXi = new double[x];         
             if (!(bool)_YprovX_x.IsChecked)
             {
+                double[,] elems = CalculatePXAndY();
                 double sum = 0;
                 for (int j = 0, t = 0; j < x; j++, t++)
                 {
                     for (int i = 0; i < y; i++)
-                        sum += Convert.ToDouble(elements[i, j].Text);
+                        sum += elems[i, j];
                     PXi[t] = sum;
                     sum = 0;
                 }
-                return PXi;
             }
-            else if ((bool)_YprovX_x.IsChecked) 
+            else
             {
                 for (int i = 0; i < PXi.Length; i++)
-                    PXi[i] = Convert.ToDouble(PX[i].Text);
-                return PXi;
+                    PXi[i] = Convert.ToDouble(PX[i].Text);               
             }
-            return null;
+            return PXi;
         }
 
         double[] CalculatePYk()
         {
-            double[] PYk = new double[y];
-            double[,] elems = CalculatePXAndY();
+            double[] PYk = new double[y];           
             if (!(bool)_XprovY_y.IsChecked)
             {
+                double[,] elems = CalculatePXAndY();
                 double sum = 0;
                 for (int i = 0, t = 0; i < y; i++, t++)
                 {
                     for (int j = 0; j < x; j++)
-                        sum += Convert.ToDouble(elems[i, j]);
+                        sum += elems[i, j];
                     PYk[t] = sum;
                     sum = 0;
                 }
