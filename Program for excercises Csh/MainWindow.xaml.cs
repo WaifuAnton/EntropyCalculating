@@ -21,6 +21,7 @@ namespace Program_for_excercises_Csh
     public partial class MainWindow : Window
     {
         TextBox[,] elements;
+        TextBox[] PX, PY;
         double[] PXi, PYk;
         double PYprovPX, PXprovPY;
         double Rx, Ry;
@@ -59,7 +60,33 @@ namespace Program_for_excercises_Csh
                 CreateMatrix(1, width);
             else if ((bool)_YprovX_x.IsChecked)
             {
-
+                CreateMatrix(height, width);
+                PX = new TextBox[width];
+                int top = -350;
+                for (int i = 0; i < PX.Length; i++) 
+                {
+                    PX[i] = new TextBox();
+                    PX[i].Width = 48;
+                    PX[i].Height = 24;
+                    PX[i].Margin = new Thickness(-600, top, 0, 0);
+                    grid1.Children.Add(PX[i]);
+                    top += 70;
+                }
+            }
+            else if ((bool)_YprovX_y.IsChecked)
+            {
+                CreateMatrix(height, width);
+                PY = new TextBox[height];
+                int top = -350;
+                for (int i = 0; i < PY.Length; i++)
+                {
+                    PY[i] = new TextBox();
+                    PY[i].Width = 48;
+                    PY[i].Height = 24;
+                    PY[i].Margin = new Thickness(-600, top, 0, 0);
+                    grid1.Children.Add(PY[i]);
+                    top += 70;
+                }
             }
         }
 
@@ -80,9 +107,9 @@ namespace Program_for_excercises_Csh
 
         double[] CalculatePXi()
         {
-            if (!(bool)_YprovX_x.IsChecked)
+            double[] PXi = new double[x];
+            if ((bool)_XandY.IsChecked || (bool)_X.IsChecked)
             {
-                double[] PXi = new double[x];
                 double sum = 0;
                 for (int j = 0, t = 0; j < x; j++, t++)
                 {
@@ -93,9 +120,11 @@ namespace Program_for_excercises_Csh
                 }
                 return PXi;
             }
-            else if((bool)_YprovX_x.IsChecked)
+            else if ((bool)_YprovX_x.IsChecked) 
             {
-                return null;
+                for (int i = 0; i < PXi.Length; i++)
+                    PXi[i] = Convert.ToDouble(PX[i].Text);
+                return PXi;
             }
             return null;
         }
@@ -103,15 +132,25 @@ namespace Program_for_excercises_Csh
         double[] CalculatePYk()
         {
             double[] PYk = new double[y];
-            double sum = 0;
-            for (int i = 0, t = 0; i < y; i++, t++)
+            if ((bool)_XandY.IsChecked)
             {
-                for (int j = 0; j < x; j++)
-                    sum += Convert.ToDouble(elements[i, j].Text);
-                PYk[t] = sum;
-                sum = 0;
+                double sum = 0;
+                for (int i = 0, t = 0; i < y; i++, t++)
+                {
+                    for (int j = 0; j < x; j++)
+                        sum += Convert.ToDouble(elements[i, j].Text);
+                    PYk[t] = sum;
+                    sum = 0;
+                }
+                return PYk;
             }
-            return PYk;
+            else if ((bool)_YprovX_y.IsChecked) 
+            {
+                for (int i = 0; i < PYk.Length; i++)
+                    PYk[i] = Convert.ToDouble(PX[i].Text);
+                return PYk;
+            }
+            return null;
         }
 
         double CalculateHX()
@@ -154,6 +193,11 @@ namespace Program_for_excercises_Csh
         }
 
         private void _YprovX_xRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void _YprovX_yRadioButton_Checked(object sender, RoutedEventArgs e)
         {
 
         }
